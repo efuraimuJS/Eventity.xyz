@@ -1,9 +1,9 @@
-# Eventity.com
-Experience unforgettable events with ease - Book with Eventity.com
+# Eventity.xyz
+Experience unforgettable events with ease - Book with Eventity.xyz
 
-Certainly! Here's an example of a README.md file for your Eventity.com GitHub repo:
+Certainly! Here's an example of a README.md file for your Eventity.xyz GitHub repo:
 
-Eventity.com
+Eventity.xyz
 ============
 
 Eventity.com is an online platform for event booking and ticketing. Built with Next.js and Strapi, Eventity.com aims to provide event organizers with an all-in-one solution for managing events and selling tickets.
@@ -51,4 +51,4 @@ If you would like to contribute to Eventity.com, please follow these guidelines:
 License
 -------
 
-Eventity.com is licensed under the MIT License. See `LICENSE` for more information.
+Eventity.xyz is licensed under the MIT License. See `LICENSE` for more information.
