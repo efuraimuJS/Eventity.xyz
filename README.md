@@ -1,7 +1,5 @@
 # Eventity.xyz
-Experience unforgettable events with ease - Book with Eventity.xyz
-
-Certainly! Here's an example of a README.md file for your Eventity.xyz GitHub repo:
+## Experience unforgettable events with ease - Book with Eventity.xyz
 
 Eventity.xyz
 ============
