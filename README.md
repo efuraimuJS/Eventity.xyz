@@ -6,7 +6,7 @@ Certainly! Here's an example of a README.md file for your Eventity.xyz GitHub re
 Eventity.xyz
 ============
 
-Eventity.com is an online platform for event booking and ticketing. Built with Next.js and Strapi, Eventity.com aims to provide event organizers with an all-in-one solution for managing events and selling tickets.
+Eventity.xyz is an online platform for event booking and ticketing. Built with Next.js and Strapi, Eventity.com aims to provide event organizers with an all-in-one solution for managing events and selling tickets.
 
 Features
 --------
@@ -30,7 +30,7 @@ Technologies Used
 Getting Started
 ---------------
 
-To get started with Eventity.com, follow these steps:
+To get started with Eventity.xyz, follow these steps:
 
 1.  Clone the repository to your local machine
 2.  Install the necessary dependencies using `npm install`
