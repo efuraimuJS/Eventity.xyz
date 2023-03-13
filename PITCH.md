@@ -5,3 +5,5 @@ We understand the challenges that event organizers face, which is why we've deve
 No more messy registrations or poor marketing - with Eventity.com, organizers can promote their events to a large audience and sell tickets effortlessly. And for attendees, finding and booking events has never been easier. Our platform allows users to manage their tickets and keep track of their bookings, all in one place.
 
 Don't let poor event management hold you back - choose Eventity.com for seamless event booking and ticketing.
+
+[Link to slides](https://docs.google.com/presentation/d/18W-AsX29Il5z3GMGyet1Mj2YocovTPPcdQoPwKDMoyg/edit#slide=id.g71fdc4dfea_0_210)
