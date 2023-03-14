@@ -1,0 +1,88 @@
+{
+  "kind": "collectionType",
+  "collectionName": "events",
+  "info": {
+    "singularName": "event",
+    "pluralName": "events",
+    "displayName": "events",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "time": {
+      "type": "time",
+      "required": true
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "price": {
+      "type": "biginteger",
+      "required": true
+    },
+    "tickets": {
+      "type": "biginteger",
+      "required": true
+    },
+    "location": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "events"
+    },
+    "eventType": {
+      "type": "enumeration",
+      "enum": [
+        "none",
+        "popular",
+        "featured"
+      ],
+      "default": "none"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "sports",
+        "charity",
+        "private",
+        "corporate",
+        "festival",
+        "party",
+        "concert"
+      ],
+      "required": true
+    },
+    "organizer": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

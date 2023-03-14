@@ -1,0 +1,18 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+@import "./abstracts/animations";
+@import "./abstracts/variables";
+
+@import "./base/base";
+@import "./base/typography";
+
+@import "./components/hero";
+@import "./components/upcomingEvents";
+@import "./components/howItWorks";
+@import "./components/testimonial";
+@import "./components/header";
+@import "./components/footer";
+@import "./components/singleEvent";
+@import "./components/contact";
+@import "./components/blog";
+@import "./components/blog-details";

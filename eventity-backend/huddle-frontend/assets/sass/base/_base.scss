@@ -1,0 +1,474 @@
+// turn off bootstrap scroll behavior
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: inherit;
+  }
+}
+.scroll {
+  scroll-behavior: smooth;
+}
+
+// Selection bg and color
+::selection {
+  color: $color-light;
+  background: $color-primary;
+}
+
+a {
+  text-decoration: none;
+  color: $color-dark;
+  transition: 0.5s;
+  &:hover {
+    color: $color-primary;
+  }
+}
+body {
+  box-sizing: border-box;
+}
+
+.section-wrapper {
+  overflow-x: hidden;
+}
+
+// Backgrounds
+.section-bg {
+  background-color: $color-secondary;
+}
+// Section paddings
+.section-padding {
+  padding: 80px 0;
+}
+
+.section-padding-t {
+  padding-top: 80px;
+}
+
+.section-padding-b {
+  padding-bottom: 80px;
+}
+
+// Hero padding
+.hero-padding {
+  padding-bottom: 100px;
+  padding-top: 200px;
+}
+
+// badge text
+.badge-text {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: $color-primary;
+  font-weight: 600;
+  display: inline-block;
+}
+// Section title
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+  text-transform: capitalize;
+  h1 {
+    font-size: 2.5rem;
+  }
+  &.left {
+    text-align: left;
+    padding-bottom: 20px;
+  }
+  &.right {
+    text-align: right;
+  }
+}
+
+.object-fit-cover{
+  object-fit: cover;
+}
+
+.section-divider {
+  margin-top: 20px;
+}
+
+/* Traingle divider */
+
+.divider-triangle {
+  width: 200px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $color-primary;
+  opacity: 0.4;
+  position: relative;
+  display: inline-block;
+}
+
+.divider-triangle:before {
+  position: absolute;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background-color: $color-primary;
+  top: -9px;
+  opacity: 0.4;
+  right: 50%;
+  transform: rotate(45deg);
+}
+
+.divider-triangle:after {
+  position: absolute;
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: $color-primary;
+  top: -9px;
+  left: 45%;
+  opacity: 0.4;
+  transform: rotate(45deg);
+}
+
+.button {
+  pointer-events: auto;
+  cursor: pointer;
+  background: $color-primary;
+  color: $color-light;
+  border: none;
+  text-align: center;
+  padding: 10px 30px;
+  line-height: 30px;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+  border-radius: 5px;
+  &:hover {
+    color: $color-light;
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__primary {
+    border-radius: 3px;
+    overflow: hidden;
+    color: $color-light;
+    background-color: $color-dark;
+    &::before {
+      content: "";
+      background: $color-primary;
+      width: 125%;
+      left: -12%;
+      transform: skew(30deg);
+      transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+    }
+    span {
+      position: relative;
+    }
+    &:hover::before {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+  &:disabled {
+    background-color: $color-gray;
+    cursor: not-allowed;
+    &::before {
+      background-color: $color-gray;
+    }
+  }
+}
+
+.btn__secondary {
+  position: relative;
+  display: inline-block;
+  line-height: 30px;
+  text-align: center;
+  padding: 10px 30px;
+  border-radius: 3px;
+  overflow: hidden;
+  text-decoration: none;
+  background-color: transparent;
+  color: $color-primary;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  svg {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $color-primary;
+    transition: all 0.5s ease;
+  }
+  &::before {
+    top: 0px;
+    left: 0px;
+    border-right: none;
+  }
+  &::after {
+    top: 0px;
+    right: 0px;
+    border-left: none;
+  }
+  &:hover::before,
+  &:hover::after {
+    width: 100%;
+  }
+  &:hover {
+    text-decoration: none;
+    background: $color-primary;
+    color: $color-light;
+    transition-delay: 0.35s;
+  }
+  &.btn-small {
+    padding: 4px 20px;
+  }
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+// links
+.link {
+  font-weight: 500;
+  position: relative;
+  color: $color-primary;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  align-items: center;
+  & svg {
+    position: relative;
+    margin-left: 4px;
+    font-size: 20px;
+    transition: all 0.4s ease-in-out;
+  }
+  &:hover {
+    color: $color-secondary;
+    & svg {
+      margin-left: 6px;
+    }
+  }
+}
+
+.calculation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  &__button {
+    background-color: $color-dark;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    button,
+    span {
+      width: 40px;
+      height: 40px;
+      border: none;
+      color: $color-light;
+      background-color: $color-dark;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        color: $color-light;
+        font-weight: 500;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+    button {
+      transition: all 0.3s;
+      margin-top: 0 !important;
+      &:hover {
+        background-color: $color-primary;
+      }
+    }
+  }
+  &__price {
+    color: $color-dark;
+    font-weight: 500;
+  }
+}
+
+// Social icon
+
+.social-icon {
+  padding-left: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 5px;
+      background-color: $color-primary;
+      color: $color-light;
+      transition: all 0.5s;
+      box-shadow: 3px 3px $color-secondary;
+      &:hover {
+        background-color: $color-dark;
+        box-shadow: none;
+      }
+      @media screen and (max-width: 320px) {
+        width: 30px;
+        height: 30px;
+      }
+      svg {
+        font-size: 20px;
+        @media screen and (max-width: 320px) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+// Preloader
+#preLoader {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  animation: preLoader 1s 1s linear forwards;
+  background-color: $color-light;
+}
+
+// Hover translate effect
+.translateEffect1 {
+  transition: all 0.3s;
+  &:hover {
+    transform: translateY(-10px);
+  }
+}
+.translateEffect2 {
+  transition: all 0.3s;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+.swiper-pagination {
+  .swiper-pagination-bullet {
+    background-color: $color-primary;
+    transition: 0.4s;
+    padding: 5px;
+    &.swiper-pagination-bullet-active {
+      width: 30px;
+      border-radius: 5px;
+    }
+  }
+}
+.bs-scroll {
+  overflow-y: scroll;
+  padding-right: 15px;
+  scrollbar-width: thin;
+  &::-webkit-scrollbar {
+    width: 0.5em;
+    height: 0.5em;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $color-secondary;
+    margin-block: 0.5em;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $color-primary;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    opacity: 0.2;
+  }
+}
+
+.drawer {
+  @include media-breakpoint-down(md) {
+    width: 400px !important;
+  }
+  @include media-breakpoint-down(sm) {
+    width: 280px !important;
+  }
+}
+
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  li {
+    a {
+      cursor: pointer;
+      width: 35px;
+      height: 35px;
+      background-color: $color-primary;
+      border-radius: 50%;
+      color: $color-light;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+
+// inner page
+.inner-page {
+  background-color: $color-secondary;
+  text-align: center;
+  text-transform: capitalize;
+  color: $color-dark;
+  h3 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    @include media-breakpoint-down(md) {
+      font-size: 35px;
+    }
+    @include media-breakpoint-down(sm) {
+      font-size: 30px;
+    }
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: $color-primary;
+      font-size: 18px;
+      font-weight: 500;
+      @include media-breakpoint-down(md) {
+        font-size: 16px;
+      }
+      a {
+        color: $color-dark;
+        transition: all 0.5s;
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+}

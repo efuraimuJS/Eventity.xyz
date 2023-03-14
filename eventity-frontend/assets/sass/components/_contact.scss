@@ -1,0 +1,99 @@
+.contact {
+  &-image {
+    height: 600px;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+        z-index: -1;
+        background-color: #14233c;
+      }
+    .title {
+      color: $color-light;
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+    }
+    .description {
+      color: $color-light;
+      font-size: 20px;
+    }
+  }
+  &-form {
+    background-color:$color-light ;
+    box-shadow: 2px 0px 15px 5px $color-shadow;
+    padding: 50px;
+    margin: 0px auto;
+    margin-top: -80px;
+    border-radius: 5px;
+    position: relative;
+    z-index: 2;
+    input, textarea{
+        width: 100%;
+        padding: 0;
+        padding: 5px 10px;
+    }
+  }
+}
+
+.faq{
+    background-color: $color-secondary;
+    &-accordion {
+        .accordion-item {
+          border-bottom: none;
+          margin-bottom: 12px;
+          border-radius: 6px;
+          box-shadow: 0px 1px 20px 0px $color-shadow;
+          .accordion-header {
+            .accordion-button {
+              display: flex;
+              justify-content: space-between;
+              border-top-left-radius: 6px;
+              border-top-right-radius: 6px;
+              box-shadow: none !important;
+              color: $color-dark;
+              font-size: 20px;
+              font-weight: 700;
+              color: $color-dark;
+              &.collapsed {
+                border-radius: 6px;
+                color: $color-dark;
+                &:before {
+                  color: $color-dark;
+                  transform: rotate(0deg);
+                }
+              }
+              &:focus {
+                box-shadow: none;
+              }
+              &::after {
+                display: none;
+              }
+            }
+            .accordion-button:not(.collapsed) {
+              background-color: $color-primary;
+              color: $color-light;
+              svg {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+      } 
+}
+
+
+

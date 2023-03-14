@@ -1,0 +1,16 @@
+// Responsive breakpoints
+// @include media-breakpoint-up(xs) {} // X-Small <576px
+// @include media-breakpoint-up(sm) { } // Small ≥576px
+// @include media-breakpoint-up(md) { } //  Medium ≥768px
+// @include media-breakpoint-up(lg) {  } //  Large ≥992px
+// @include media-breakpoint-up(xl) { } // Desktop device ≥1200px
+// @include media-breakpoint-up(xxl) { } // Large screens device 	≥1400px
+
+// @include media-breakpoint-down(sm) { ... } 
+// @include media-breakpoint-down(md) { ... }  
+// @include media-breakpoint-down(lg) { ... }
+// @include media-breakpoint-down(xl) { ... }
+// @include media-breakpoint-down(xxl) { ... }
+
+
+// @include media-breakpoint-between(md, xl) { ... }

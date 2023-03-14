@@ -1,0 +1,51 @@
+.footer {
+  background-color: $color-secondary;
+    &__top {
+        padding-top: 60px;
+        &__content {
+          text-align: center;
+          position: relative;
+          h4 {
+            line-height: 1.5;
+          }
+          h2 {
+            margin-bottom: 25px;
+            a {
+              color: $color-primary;
+              &:hover {
+                color: $color-dark;
+              }
+            }
+          }
+        }
+      }
+    &__middle{
+        margin-top: 40px;
+        margin-bottom: 25px;
+        h2{
+          font-size: 45px;
+          font-weight: 700;
+          color: $color-primary;
+        }
+        &__menu {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            display: inline;
+            li {
+              display: inline-block;
+              a {
+                margin-left: 10px;
+                margin-right: 10px;
+                &:hover {
+                  color: $color-primary;
+                }
+              }
+            }
+          }
+    }
+      &__copyright{
+        margin: 20px 0;
+      }
+  }

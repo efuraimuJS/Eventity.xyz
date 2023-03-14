@@ -1,0 +1,76 @@
+.testimonial {
+  background-color: $color-secondary;
+  .next,
+  .prev {
+    top: 20px;
+    position: absolute;
+    left: auto;
+    height: 40px;
+    width: 40px;
+    border: 1px solid $color-dark;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    svg {
+      font-size: 25px;
+    }
+    &.swiper-button-disabled {
+      border-color: $color-border;
+      cursor: auto;
+      svg {
+        color: $color-border;
+      }
+    }
+  }
+  .next {
+    right: 20px;
+  }
+  .prev {
+    right: 65px;
+  }
+  &__item {
+    background-color: $color-light;
+    padding: 30px;
+    border-radius: 10px;
+    @include media-breakpoint-down(lg) {
+      padding: 20px;
+    }
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      &__image {
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+      &__description {
+        padding-bottom: 0;
+        margin-bottom: 10px;
+      }
+      &__info {
+        &--name {
+          font-size: 20px;
+        }
+        &--title {
+          margin-bottom: 0;
+        }
+      }
+      &__rating {
+        svg {
+          font-size: 20px;
+          color: goldenrod;
+        }
+      }
+    }
+  }
+  .swiper-wrapper {
+    margin-bottom: 60px;
+  }
+}
