@@ -32,35 +32,30 @@ const Header = () => {
           >
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link" href="/">
-                  Home
+                <Link className="nav-link" href="/services">
+                  Services
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/events">
-                  All Events
+                <Link className="nav-link" href="/about_us">
+                  About Us
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/blogs">
-                  Blogs
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" href="/contact">
-                  Contact
+                <Link className="nav-link" href="/pricing">
+                  Pricing
                 </Link>
               </li>
             </ul>
             <ul className="navbar-nav navbar__right d-block d-lg-none">
               <li className="nav-item">
-                <Link className="nav-link" href="mailto:admin@gmail.com">
+                <Link className="nav-link" href="/signin">
                 <AiOutlineLogin />
                   Log in
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="tel:0123456789">
+                <Link className="nav-link" href="/signin/signup">
                   <AiOutlineUserAdd />
                   Sign up
                 </Link>
@@ -70,13 +65,13 @@ const Header = () => {
 
           <ul className="navbar-nav navbar__right d-none d-lg-flex align-items-center gap-2">
             <li className="nav-item">
-              <Link className="nav-link" href="mailto:admin@gmail.com">
+              <Link className="nav-link" href="/signin">
                 <AiOutlineLogin />
                 Log in
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="tel:0123456789">
+              <Link className="nav-link" href="/signin/signup">
               <AiOutlineUserAdd />
                 Sign up
               </Link>
