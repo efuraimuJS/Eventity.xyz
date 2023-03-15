@@ -1,0 +1,32 @@
+.masterContainer {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  justify-content: center; /* Center the div horizontally */
+  //align-items: center; /* Center the div vertically */
+  //margin: 0 auto;
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+
+  .signinContainer {
+
+
+
+
+
+    .signinImage {
+      max-width: 100%; /* set the maximum width of the image to 100% of the container */
+      max-height: 100%; /* set the maximum height of the image to 100% of the container */
+      display: block; /* make the image a block element */
+      object-fit: cover;
+    }
+
+    .signinForm {
+    }
+
+    form {
+    }
+  }
+}

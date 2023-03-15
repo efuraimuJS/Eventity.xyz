@@ -15,7 +15,7 @@ const EventSinglePage = ({events, slug}) => {
     attributes;
   return (
     <Layout title={name}>
-       <InnerPageLayout title={name} />
+      <InnerPageLayout title={name} />
       <div className="singlePage section-padding">
         <div className="container">
           <h2>{name}</h2>
@@ -67,7 +67,7 @@ const EventSinglePage = ({events, slug}) => {
                   </div>
                   <div>
                     <p>Ticket Price</p>
-                    <h5>${price} per ticket</h5>
+                    <h5>/={price} per ticket</h5>
                   </div>
                 </div>
                 <div className="d-flex align-items-center gap-4 mb-4 mb-lg-5">

@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { Navbar } from "react-bootstrap";
-import { MdOutlineEmail, MdOutlineCall } from "react-icons/md";
+import { AiOutlineLogin, AiOutlineUserAdd } from "react-icons/ai";
 
+import Image from 'next/image'
 const Header = () => {
   return (
     <div className="header">
       <div className="container">
         <Navbar className="p-0" bg="none" expand="lg">
           <Link className="navbar-brand" href="/">
-            <h2 className="logo">Huddle.</h2>
+            <Image src="/logo-no-background_web.svg" alt="Eventity.xyz" width={150} height={37}/>
           </Link>
           <Navbar.Toggle
             className="navbar-toggler collapsed"
@@ -54,14 +55,14 @@ const Header = () => {
             <ul className="navbar-nav navbar__right d-block d-lg-none">
               <li className="nav-item">
                 <Link className="nav-link" href="mailto:admin@gmail.com">
-                <MdOutlineEmail />
-                  admin@gmail.com
+                <AiOutlineLogin />
+                  Log in
                 </Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="tel:0123456789">
-                  <MdOutlineCall />
-                  0123456789
+                  <AiOutlineUserAdd />
+                  Sign up
                 </Link>
               </li>
             </ul>
@@ -70,14 +71,14 @@ const Header = () => {
           <ul className="navbar-nav navbar__right d-none d-lg-flex align-items-center gap-2">
             <li className="nav-item">
               <Link className="nav-link" href="mailto:admin@gmail.com">
-                <MdOutlineEmail />
-                admin@gmail.com
+                <AiOutlineLogin />
+                Log in
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="tel:0123456789">
-              <MdOutlineCall />
-                0123456789
+              <AiOutlineUserAdd />
+                Sign up
               </Link>
             </li>
           </ul>

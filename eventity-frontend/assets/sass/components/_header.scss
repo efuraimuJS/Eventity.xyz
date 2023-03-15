@@ -92,7 +92,7 @@
     .navbar-brand {
       img {
         max-width: 200px;
-        display: none;
+        display: inline-block;
         &.logo-transparent {
           display: block;
         }

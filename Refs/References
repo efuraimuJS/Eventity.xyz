@@ -1,0 +1,22 @@
+==Available breakpoints
+https://stackoverflow.com/questions/14207109/hiding-elements-in-responsive-layout
+https://getbootstrap.com/docs/5.2/layout/breakpoints/#available-breakpoints
+
+The valid sizes are:
+
+xs for phones in portrait mode (<34em)
+sm for phones in landscape mode (≥34em)
+md for tablets (≥48em)
+lg for desktops (≥62em)
+xl for desktops (≥75em)
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+==
