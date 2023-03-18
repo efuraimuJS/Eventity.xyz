@@ -1,0 +1,80 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "attributes": {
+                "name": "MedlinePlus Connect for EHRs",
+                "slug": "medline-plus-connect-for-eh-rs",
+                "date": "2023-03-01",
+                "time": "00:00:00.000",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id arcu a dolor fringilla pulvinar gravida sit amet mi. Cras eget metus quis sem accumsan finibus. Vestibulum orci velit, malesuada et hendrerit ut, aliquet id elit. Donec hendrerit, dolor id posuere pharetra, libero diam vehicula lectus, vitae ornare odio libero eget dui. Sed finibus urna non viverra posuere. Cras nec lorem justo. Ut id elit massa. Nullam id rutrum ante. Sed maximus, nisl in elementum aliquet, sapien massa luctus mi, a dignissim nulla ligula a quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\nDuis vel nisl vel justo hendrerit vehicula non feugiat erat. Nulla facilisi. Nunc arcu erat, aliquet nec justo ut, aliquet rhoncus dolor. Curabitur ornare arcu ut metus ultrices feugiat sagittis eget mi. Etiam eros massa, viverra tristique sem condimentum, mattis tincidunt nulla. Duis et turpis eu diam accumsan viverra. Mauris mollis suscipit metus quis interdum. Quisque aliquam neque non enim tristique malesuada. Mauris vestibulum tortor eget tortor luctus, sed tincidunt neque volutpat. Curabitur mollis metus at velit euismod scelerisque.\n\nDonec ut metus venenatis, auctor eros non, congue diam. Nulla congue mauris non augue pretium, rhoncus bibendum dui sagittis. Cras et velit eget massa congue sollicitudin vitae quis nisi. Quisque convallis fringilla scelerisque. Fusce tellus enim, egestas sed semper vitae, semper imperdiet nibh. Nullam vitae enim ac dui maximus bibendum. Maecenas ac tincidunt ante. Proin elementum magna quis neque faucibus, quis volutpat ligula commodo.\n\nIn ullamcorper ut ligula ac efficitur. Aenean at nunc justo. Curabitur justo erat, fermentum ut lacus nec, facilisis ultricies leo. Ut iaculis id turpis eu varius. Nunc lacinia, nunc ut malesuada luctus, nisi enim convallis purus, at placerat neque lorem eget velit. Aliquam aliquet porta nulla facilisis hendrerit. Nulla at enim in velit sagittis posuere at vel augue. Suspendisse at lacus nec metus sagittis tristique vel vel nisl. Integer volutpat, massa sed condimentum pellentesque, leo felis porttitor tellus, id maximus velit dolor vel elit. Vivamus pharetra dui ac blandit dapibus. Nulla in augue ut enim egestas facilisis. Donec condimentum tempus urna, sed consectetur metus tempor a. Etiam ac eleifend lacus. Ut eu dictum nisl, mollis cursus urna. Ut at sagittis mi.\n\nDonec auctor dignissim sollicitudin. Morbi imperdiet ante sed risus condimentum consequat. Nam nibh leo, ullamcorper vel augue sed, efficitur porta lorem. Praesent imperdiet arcu a elit finibus euismod. In vitae rhoncus nulla, ac aliquam risus. Donec ut tortor et felis ornare pretium sed quis lacus. Pellentesque luctus sit amet sem dapibus lacinia. Suspendisse ac enim auctor, tincidunt magna eget, feugiat sem. Pellentesque in congue nunc, at egestas urna.\n\n",
+                "price": "1500",
+                "tickets": "10",
+                "location": "Lorem ipsum dolor sit amet.",
+                "eventType": "featured",
+                "category": "sports",
+                "organizer": "Lorem ipsum",
+                "createdAt": "2023-03-13T23:17:26.524Z",
+                "updatedAt": "2023-03-13T23:17:34.936Z",
+                "publishedAt": "2023-03-13T23:17:34.882Z",
+                "image": {
+                    "data": {
+                        "id": 1,
+                        "attributes": {
+                            "name": "download.jpg",
+                            "alternativeText": null,
+                            "caption": null,
+                            "width": 318,
+                            "height": 159,
+                            "formats": {
+                                "thumbnail": {
+                                    "name": "thumbnail_download.jpg",
+                                    "hash": "thumbnail_download_ffa61a443a",
+                                    "ext": ".jpg",
+                                    "mime": "image/jpeg",
+                                    "path": null,
+                                    "width": 245,
+                                    "height": 123,
+                                    "size": 4.14,
+                                    "url": "/uploads/thumbnail_download_ffa61a443a.jpg"
+                                }
+                            },
+                            "hash": "download_ffa61a443a",
+                            "ext": ".jpg",
+                            "mime": "image/jpeg",
+                            "size": 4.23,
+                            "url": "/uploads/download_ffa61a443a.jpg",
+                            "previewUrl": null,
+                            "provider": "local",
+                            "provider_metadata": null,
+                            "createdAt": "2023-03-13T23:17:02.567Z",
+                            "updatedAt": "2023-03-13T23:17:02.567Z"
+                        }
+                    }
+                },
+                "user": {
+                    "data": {
+                        "id": 1,
+                        "attributes": {
+                            "username": "user_1",
+                            "email": "user_1@mail.com",
+                            "provider": "local",
+                            "confirmed": true,
+                            "blocked": false,
+                            "createdAt": "2023-03-13T23:25:25.629Z",
+                            "updatedAt": "2023-03-13T23:41:50.022Z"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "page": 1,
+            "pageSize": 25,
+            "pageCount": 1,
+            "total": 1
+        }
+    }
+}

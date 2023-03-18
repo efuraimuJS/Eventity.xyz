@@ -5,14 +5,13 @@ import Link from 'next/link'
 import Image from "next/image";
 import {AiFillGoogleCircle} from "react-icons/ai";
 
-import {signIn} from 'next-auth/react';
+import {signIn, useSession} from 'next-auth/react';
 import {useRouter} from 'next/router'
-import { useSession } from "next-auth/react"
 
 
 export default function SignIn() {
-    const { data: session } = useSession()
-
+    const {data: session} = useSession();
+    console.log(session)
     const router = useRouter()
 
     const onSubmit = async (e) => {
@@ -29,26 +28,30 @@ export default function SignIn() {
             return;
         }
         alert('Credential is not valid');
-
     }
 
     // Check if a user is signed in? Else Rerender the SignIn page
-    if (session){
+    if (session) {
         router.replace('/')
         return;
     }
 
     return (<>
-            <div className={styles.masterContainer}>
+            <div className={`${styles.masterContainer} d-flex`}>
                 <div className={`${styles.signinContainer} position-absolute`}>
                     <Row>
                         <Col sm={`12`} md="5">
                             <div>
                                 <Link href={`/`}>
-                                <Image src="/logo-no-background_web.svg" alt="Eventity.xyz" width={150} height={37}/>
+                                    <Image
+                                        src="/logo-no-background_web.svg"
+                                           alt="Eventity.xyz"
+                                           width={150}
+                                           height={37}
+                                    />
                                 </Link>
-                                </div>
-                            <div id={`form-box-container`} className={`mx-3 pt-3`}>
+                            </div>
+                            <div id={styles.formBoxContainer} className={`mx-3 pt-3`}>
                                 <h1>Sign into your <br/> account</h1>
 
                                 <form onSubmit={onSubmit}>

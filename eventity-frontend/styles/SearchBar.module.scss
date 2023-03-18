@@ -1,0 +1,54 @@
+.form {
+  position: relative;
+}
+
+.form .formSearch {
+  position: absolute;
+  top: 13px;
+  left: 20px;
+  color: #9ca3af;
+}
+
+.form span {
+  position: absolute;
+  right: 17px;
+  top: 13px;
+  padding: 2px;
+  border-left: 1px solid #d1d5db;
+}
+
+.leftPan {
+  padding-left: 7px;
+}
+
+.leftPan i {
+  padding-left: 10px;
+}
+
+.formInput {
+  height: 55px;
+  width: 500px;
+  max-width: 500px;
+
+  text-indent: 33px;
+  border-radius: 10px;
+}
+
+.formInput:focus {
+  box-shadow: none;
+  border: none;
+}
+
+@media (max-width: 767.98px) {
+  .formInput{
+    height: 49.5px;
+    width: 366.666667px;
+  }
+}
+
+@media (max-width: 320px) {
+  .formInput{
+    height: 44.55px;
+    width: 244.444445px;
+  }
+}

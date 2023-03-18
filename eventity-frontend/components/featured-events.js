@@ -9,13 +9,14 @@ import {
 } from "react-icons/im";
 import Link from "next/link";
 import { API_URL } from "../config";
+import styles from '../styles/FeaturedEvents.module.scss'
 
 const FeaturedEvents = ({ events }) => {
   const data = events?.filter(evt => evt?.attributes?.eventType === "featured")
   return (
     <div id="featured-events" className="featured-events section-padding">
-      <div className="container">
-        <SectionTitle title="Featured Events" />
+      <div className={`container`}>
+        <SectionTitle  title="Today's Top Features 📈"  />
         <div className="row">
           {data?.slice(0, 3).map((evt) => (
             <div key={evt.id} className="col-md-6 col-lg-4 mb-4">

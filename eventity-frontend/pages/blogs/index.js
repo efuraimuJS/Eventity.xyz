@@ -70,7 +70,7 @@ const Blogs = ({ blogs }) => {
               </div>
             ))}
           </div>
-          {data.length > 6 ? (
+          {data?.length > 6 ? (
             <Pagination
               postsPerPage={postsPerPage}
               totalPosts={data?.length}
