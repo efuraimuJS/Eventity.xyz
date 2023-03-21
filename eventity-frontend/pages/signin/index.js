@@ -37,10 +37,10 @@ export default function SignIn() {
     }
 
     return (<>
-            <div className={`${styles.masterContainer} d-flex`}>
+            <div  className={`${styles.masterContainer} d-flex`}>
                 <div className={`${styles.signinContainer} position-absolute`}>
-                    <Row>
-                        <Col sm={`12`} md="5">
+                    <Row style={{width: "inherit"}} className={styles.signinContainer}>
+                        <Col className={styles.signinContainer} sm={`12`} md="5">
                             <div>
                                 <Link href={`/`}>
                                     <Image
