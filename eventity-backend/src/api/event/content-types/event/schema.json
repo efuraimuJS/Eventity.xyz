@@ -52,12 +52,6 @@
         "images"
       ]
     },
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "events"
-    },
     "eventType": {
       "type": "enumeration",
       "enum": [
@@ -83,6 +77,12 @@
     "organizer": {
       "type": "string",
       "required": true
+    },
+    "user_events": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "events_user"
     }
   }
 }
