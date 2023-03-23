@@ -1,3 +1,4 @@
+import React, {useEffect, useState} from 'react';
 import Layout from "../../components/global/layout";
 import {FaUserCircle} from "react-icons/fa";
 import {ImCalendar, ImClock, ImLocation2, ImPriceTags, ImTicket} from "react-icons/im";
@@ -6,22 +7,119 @@ import InnerPageLayout from "../../components/inner-page-layout";
 import Link from "next/link";
 import SectionTitle from "../../components/global/section-title";
 import md from 'markdown-it';
-import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import {useRouter} from 'next/router';
+import {FUNDING, PayPalButtons, PayPalScriptProvider,} from '@paypal/react-paypal-js'
+import {useSession} from "next-auth/react";
+import {useMutation} from 'react-query'
+import axios from "axios";
+
 
 const EventSinglePage = ({events, slug}) => {
     const [show, setShow] = useState(false);
+    let [ticketTotal, setTicketTotal] = useState('0')
+    let [ticketQuantity, setTicketQuantity] = useState('1')
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    let globalUserId; // define the global variable outside of any functions
+
+    const userIdPromise = new Promise(async function (resolve, reject) {
+        try {
+            const session = await useSession()
+            const {data: {id}} = session;
+            resolve(id);
+        } catch (e) {
+            reject(e);
+        }
+    });
+
+    userIdPromise.then(userId => {
+        globalUserId = userId; // assign the value of userId to the global variable
+    }).catch(error => {
+        // console.error(error);
+    });
+
+    async function getUserId() {
+        try {
+            const userId = await userIdPromise;
+            return userId;
+        } catch (error) {
+            // console.error(error);
+        }
+    }
+
+    getUserId().then(userId => {
+        // console.log(userId); // this will log the value of userId retrieved from the promise
+        console.log(globalUserId); // this will also log the value of userId assigned to the global variable
+    }).catch(error => {
+        // console.error(error);
+    });
+
+    useEffect(() => {
+        setTicketTotal((parseInt(ticketQuantity) * parseInt(price)).toString())
+    }, [ticketQuantity])
+
+    const handleChange = (e) => setTicketQuantity(e.target.value)
 
     const event = events?.filter((evt) => evt?.attributes?.slug === slug);
-    const {attributes} = event[0];
+    const {id: eventId, attributes} = event[0];
     const {date, image, tickets, time, name, location, description, organizer, price} =
         attributes;
 
+    const router = useRouter()
+
+    // function handlePaypalSubmit(e) {
+    //     // e.preventDefault()
+    //     //
+    //     router.push(
+    //         {
+    //             pathname: `${process.env.NEXTAUTH_URL}/api/paypal/createOrder`,
+    //             query: {
+    //
+    //                 events_orders: id,
+    //                 total_price: ticketTotal,
+    //                 order_quantity: ticketQuantity,
+    //                 order_user: globalUserId,
+    //
+    //             }
+    //         }
+    //         , `http://localhost:3000/api/paypal/createOrder?events_orders=${id}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}`
+    //     )
+    // }
+
+    const createMutation = useMutation(() => axios.post(
+        `http://localhost:3000/api/paypal/createOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}&eventName=${name}&eventPrice=${price}`
+    ).then(response => response.data.orderID))
+
+    const captureMutation = useMutation((orderUid) => {
+        // console.log('DataLog', data)
+        axios.post(
+            `http://localhost:3000/api/paypal/captureOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}`,
+            {...orderUid},
+            {headers: {"Content-Type": "application/json"}}
+        )
+    })
+
+    const createPayPalOrder = async () => {
+        const orderUid  = await createMutation.mutateAsync({})
+        // console.log(response)
+        console.log(orderUid)
+        return orderUid
+
+    }
+
+    const onApprove = async (data) => {
+        // console.log(data)
+        await captureMutation.mutateAsync({orderID: data.orderID});
+    }
+
+    // {
+    //     console.log(captureMutation.data)
+    // }
     return (
         <Layout title={name}>
             <InnerPageLayout title={name}/>
@@ -95,37 +193,66 @@ const EventSinglePage = ({events, slug}) => {
                                         size="lg"
                                     >
                                         <Modal.Header closeButton>
-                                            <Modal.Title>Modal heading</Modal.Title>
+                                            <Modal.Title>{`${name} Checkout`}</Modal.Title>
                                         </Modal.Header>
                                         <Modal.Body>
                                             <Form>
-                                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                                    <Form.Label>Email address</Form.Label>
+                                                {/*controlId="exampleForm.ControlInput1"*/}
+                                                <Form.Group className="mb-3">
+                                                    <Form.Label>Ticket Quantity</Form.Label>
                                                     <Form.Control
-                                                        type="email"
-                                                        placeholder="name@example.com"
+                                                        type="text"
+                                                        placeholder="1"
                                                         autoFocus
+                                                        onChange={handleChange}
+                                                        id={`ticketQuantity`}
+                                                        name={`ticketQuantity`}
+                                                        value={ticketQuantity}
                                                     />
                                                 </Form.Group>
+                                                {/*controlId="exampleForm.ControlTextarea1"*/}
                                                 <Form.Group
                                                     className="mb-3"
-                                                    controlId="exampleForm.ControlTextarea1"
+
                                                 >
-                                                    <Form.Label>Example textarea</Form.Label>
-                                                    <Form.Control as="textarea" rows={3}/>
+                                                    <Form.Label>Tickets' Total</Form.Label>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="0.00"
+                                                        autoFocus
+                                                        onChange={handleChange}
+                                                        id={`ticketTotal`}
+                                                        name={`ticketTotal`}
+                                                        value={ticketTotal}
+                                                        readOnly={true}
+                                                    />
                                                 </Form.Group>
                                             </Form>
                                         </Modal.Body>
                                         <Modal.Footer>
-                                            <Button variant="secondary" onClick={handleClose}>
-                                                Close
-                                            </Button>
-                                            <Button variant="primary" onClick={handleClose}>
-                                                Save Changes
-                                            </Button>
+                                            <PayPalScriptProvider
+                                                options={{
+                                                    'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
+                                                    currency: 'USD',
+                                                }}
+                                            >
+                                                <PayPalButtons
+                                                    style={{
+                                                        color: 'gold',
+                                                        shape: 'rect',
+                                                        label: 'pay',
+                                                        height: 50,
+                                                    }}
+                                                    fundingSource={FUNDING.PAYPAL}
+                                                    createOrder={createPayPalOrder}
+                                                    onApprove={onApprove}
+                                                    // onClick={handlePaypalSubmit}
+                                                />
+                                            </PayPalScriptProvider>
+
                                         </Modal.Footer>
                                     </Modal>
-                                    <Button className="button w-100 mt-4"  onClick={handleShow}>
+                                    <Button className="button w-100 mt-4" onClick={handleShow}>
                                         Confirm your ticket
                                     </Button>
                                 </div>

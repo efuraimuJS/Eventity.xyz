@@ -83,6 +83,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "events_user"
+    },
+    "ordered_events": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::order.order",
+      "mappedBy": "events_orders"
     }
   }
 }

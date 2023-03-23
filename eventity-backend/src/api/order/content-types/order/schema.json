@@ -12,10 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "events": {
+    "events_orders": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::event.event"
+      "relation": "manyToMany",
+      "target": "api::event.event",
+      "inversedBy": "ordered_events"
     },
     "total_price": {
       "type": "decimal",
@@ -32,11 +33,20 @@
     "order_uid": {
       "type": "uid"
     },
-    "order_users": {
+    "order_user": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "user_orders"
+      "inversedBy": "users_order"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PENDING",
+        "PAID"
+      ],
+      "required": true,
+      "default": "PENDING"
     }
   }
 }

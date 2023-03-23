@@ -69,17 +69,17 @@
       "target": "api::blog.blog",
       "mappedBy": "user"
     },
-    "user_orders": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::order.order",
-      "mappedBy": "order_users"
-    },
     "events_user": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::event.event",
       "mappedBy": "user_events"
+    },
+    "users_order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "mappedBy": "order_user"
     }
   }
 }

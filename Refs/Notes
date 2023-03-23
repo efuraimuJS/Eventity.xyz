@@ -42,3 +42,10 @@
 {}
 
 #__next > div > div > div
+
+events_orders=${id}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}
+
+
+const createMutation = useMutation<{ data: any }, AxiosError, any, Response>(
+    (): any => axios.post('/api/paypal/createOrder')
+  )

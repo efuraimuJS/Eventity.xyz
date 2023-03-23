@@ -46,7 +46,6 @@ export default NextAuth({
             if (isSignIn){
                 token.id = user.id
                 token.jwt = user.jwt
-
             }
             return Promise.resolve(token)
         }
