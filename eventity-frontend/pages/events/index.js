@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Tab, Tabs} from "react-bootstrap";
 import Layout from "../../components/global/layout";
 import {ImCalendar, ImClock, ImLocation2, ImPriceTags, ImTicket,} from "react-icons/im";
@@ -6,9 +6,12 @@ import Link from "next/link";
 import {API_URL} from "../../config";
 import Pagination from "../../components/pagination";
 import InnerPageLayout from "../../components/inner-page-layout";
-import {getSession} from "next-auth/react";
+import {useSession} from "next-auth/react";
+import {useRouter} from 'next/router'
 
 const EventPage = ({events}) => {
+
+
     const [key, setKey] = useState("AllEvents");
     const {data} = events;
     const sportsEvents = data?.filter(evt => evt.attributes.category === "sports")
@@ -27,10 +30,29 @@ const EventPage = ({events}) => {
     const eventData = data?.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const {data: session} = useSession();
+    useEffect(() => {
+        if (session == null) return;
+        // console.log('session.jwt', session.jwt);
+    }, [session]);
+
+    const router = useRouter()
+
+    // Check if a user is signed in? Else Rerender the SignIn page
+    if (!session) {
+        router.replace('/')
+
+
+        return;
+    }
     return (
+
         <Layout title="Event Page">
+
             <InnerPageLayout title="All Events"/>
             <div className="upcoming-events section-padding">
+
                 <div className="container">
                     <Tabs
                         id="controlled-tab-example"

@@ -11,12 +11,12 @@ import {useRouter} from 'next/router'
 
 export default function SignIn() {
     const {data: session} = useSession();
-    console.log(session)
+    // console.log(session)
     const router = useRouter()
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        console.log(e.target.password.value, e.target.email.value)
+        // console.log(e.target.password.value, e.target.email.value)
         const result = await signIn('credentials', {
             redirect: false,
             email: e.target.email.value,

@@ -105,7 +105,7 @@ const EventSinglePage = ({events, slug}) => {
     })
 
     const createPayPalOrder = async () => {
-        const orderUid  = await createMutation.mutateAsync({})
+        const orderUid = await createMutation.mutateAsync({})
         // console.log(response)
         console.log(orderUid)
         return orderUid
@@ -120,6 +120,25 @@ const EventSinglePage = ({events, slug}) => {
     // {
     //     console.log(captureMutation.data)
     // }
+
+    const {data: session} =  useSession();
+
+    useEffect(() => {
+        if (session == null) return;
+        // console.log('session.jwt', session.jwt);
+    }, [session]);
+
+
+    // Check if a user is signed in? Else Rerender the SignIn page
+    // if (!session) {
+    //     useEffect(() => {
+    //         // alert(`You aren't authorize to proceed, kindly login!`)
+    //         router.replace('/signin')
+    //
+    //     }, [])
+    //     return;
+    // }
+
     return (
         <Layout title={name}>
             <InnerPageLayout title={name}/>

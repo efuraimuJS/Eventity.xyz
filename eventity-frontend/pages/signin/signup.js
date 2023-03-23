@@ -73,6 +73,7 @@ export default function SignUp() {
                 // console.log(error.response.data.error.message)
                 if (!error.response.data.error.message) {
                     setAlert(['error', 'Something went wrong'])
+                    setShow(true)
                 } else {
                     const messages = []
                     messages.push(error.response.data.error.message)
@@ -117,7 +118,8 @@ export default function SignUp() {
                             <div id={styles.formBoxContainer} className={`mx-3 pt-3`}>
                                 {
                                     ((alert && show) && (
-                                        <> <Alert className={styles.authAlerts} variant="danger"
+                                        <>
+                                            <Alert className={styles.authAlerts} variant="danger"
                                                   onClose={() => setShow(false)} dismissible>
                                             <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
                                             <ul>
