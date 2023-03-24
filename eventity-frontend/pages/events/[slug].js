@@ -12,52 +12,20 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import {useRouter} from 'next/router';
 import {FUNDING, PayPalButtons, PayPalScriptProvider,} from '@paypal/react-paypal-js'
-import {useSession} from "next-auth/react";
+import {useSession, getSession} from "next-auth/react";
 import {useMutation} from 'react-query'
 import axios from "axios";
 
-
-const EventSinglePage = ({events, slug}) => {
+const EventSinglePage = ({events, slug, userIdSS}) => {
     const [show, setShow] = useState(false);
     let [ticketTotal, setTicketTotal] = useState('0')
     let [ticketQuantity, setTicketQuantity] = useState('1')
+    // let [globalUserId, setGlobalUserId] = useState()
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    let globalUserId; // define the global variable outside of any functions
 
-    const userIdPromise = new Promise(async function (resolve, reject) {
-        try {
-            const session = await useSession()
-            const {data: {id}} = session;
-            resolve(id);
-        } catch (e) {
-            reject(e);
-        }
-    });
-
-    userIdPromise.then(userId => {
-        globalUserId = userId; // assign the value of userId to the global variable
-    }).catch(error => {
-        // console.error(error);
-    });
-
-    async function getUserId() {
-        try {
-            const userId = await userIdPromise;
-            return userId;
-        } catch (error) {
-            // console.error(error);
-        }
-    }
-
-    getUserId().then(userId => {
-        // console.log(userId); // this will log the value of userId retrieved from the promise
-        console.log(globalUserId); // this will also log the value of userId assigned to the global variable
-    }).catch(error => {
-        // console.error(error);
-    });
 
     useEffect(() => {
         setTicketTotal((parseInt(ticketQuantity) * parseInt(price)).toString())
@@ -72,33 +40,19 @@ const EventSinglePage = ({events, slug}) => {
 
     const router = useRouter()
 
-    // function handlePaypalSubmit(e) {
-    //     // e.preventDefault()
-    //     //
-    //     router.push(
-    //         {
-    //             pathname: `${process.env.NEXTAUTH_URL}/api/paypal/createOrder`,
-    //             query: {
-    //
-    //                 events_orders: id,
-    //                 total_price: ticketTotal,
-    //                 order_quantity: ticketQuantity,
-    //                 order_user: globalUserId,
-    //
-    //             }
-    //         }
-    //         , `http://localhost:3000/api/paypal/createOrder?events_orders=${id}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}`
-    //     )
-    // }
+
+    const URL1 = `http://localhost:3000/api/paypal/createOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_users=${userIdSS}&eventName=${encodeURIComponent(name)}&eventPrice=${price}`
+    console.log(URL1)
 
     const createMutation = useMutation(() => axios.post(
-        `http://localhost:3000/api/paypal/createOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}&eventName=${name}&eventPrice=${price}`
+        `http://localhost:3000/api/paypal/createOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_users=${userIdSS}&eventName=${name}&eventPrice=${price}`
     ).then(response => response.data.orderID))
+
 
     const captureMutation = useMutation((orderUid) => {
         // console.log('DataLog', data)
         axios.post(
-            `http://localhost:3000/api/paypal/captureOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_user=${globalUserId}`,
+            `http://localhost:3000/api/paypal/captureOrder?events_orders=${eventId}&total_price=${ticketTotal}&order_quantity=${ticketQuantity}&order_users=${userIdSS}`,
             {...orderUid},
             {headers: {"Content-Type": "application/json"}}
         )
@@ -117,27 +71,6 @@ const EventSinglePage = ({events, slug}) => {
         await captureMutation.mutateAsync({orderID: data.orderID});
     }
 
-    // {
-    //     console.log(captureMutation.data)
-    // }
-
-    const {data: session} =  useSession();
-
-    useEffect(() => {
-        if (session == null) return;
-        // console.log('session.jwt', session.jwt);
-    }, [session]);
-
-
-    // Check if a user is signed in? Else Rerender the SignIn page
-    // if (!session) {
-    //     useEffect(() => {
-    //         // alert(`You aren't authorize to proceed, kindly login!`)
-    //         router.replace('/signin')
-    //
-    //     }, [])
-    //     return;
-    // }
 
     return (
         <Layout title={name}>
@@ -336,15 +269,30 @@ const EventSinglePage = ({events, slug}) => {
 export default EventSinglePage;
 
 
-export async function getServerSideProps({query: {slug}}) {
-    const res = await fetch(`${API_URL}/api/events?populate=*`);
-    const allEvents = await res.json();
+export async function getServerSideProps({req, query: {slug}}) {
+    const result = await fetch(`${API_URL}/api/events?populate=*`);
+    const allEvents = await result.json();
     const events = allEvents.data;
+    console.log(events)
+    const session = await getSession({req})
+    const {id: userIdSS} = session ?? {}
+    console.log(session)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/signin',
+                permanent: false,
+            },
+        }
+    }
+
 
     return {
         props: {
             events,
             slug,
+            userIdSS,
         },
     };
 }

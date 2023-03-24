@@ -1,7 +1,7 @@
 import client from '../../../lib/paypal'
 import paypal from '@paypal/checkout-server-sdk'
 import Strapi from "strapi-sdk-js";
-import Router from 'next/router'
+
 
 const strapi = new Strapi({
     url: "http://localhost:1337",
@@ -14,15 +14,17 @@ const strapi = new Strapi({
     axiosOptions: {},
 });
 
+
+
 export default async function handler(req, res) {
     //Capture order to complete payment
     // console.log(req)
     // console.log(req.body)
-    // console.log(req.query)
+    console.log(req.query)
 
     const {orderID} = req.body
     // events_orders : can be an **ARRAY**
-    const {events_orders, total_price, order_quantity, order_user} = req.query
+    const {events_orders, total_price, order_quantity, order_users} = req.query
 
     // console.log(orderID)
     const PaypalClient = client()
@@ -34,10 +36,10 @@ export default async function handler(req, res) {
     if (!response) {
         res.status(500)
     }
-
-    await strapi.update('orders', orderID, {
-        status: 'PAID',
-    })
+    //
+    // await strapi.update('orders', orderID, {
+    //     status: 'PAID',
+    // })
     const currentTicketsData = await strapi.findOne('events', parseInt(events_orders), {
         fields: ['tickets']
     })
@@ -58,3 +60,6 @@ export default async function handler(req, res) {
     res.json({...response.result})
 
 }
+
+
+

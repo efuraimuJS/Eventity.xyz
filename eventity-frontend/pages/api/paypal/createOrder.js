@@ -14,15 +14,16 @@ const strapi = new Strapi({
     axiosOptions: {},
 });
 
+
 export default async function handler(req, res) {
-    // console.log(req.query)
+    console.log(req.query)
     // console.log(req.body)
 
-    const {events_orders, total_price, order_quantity, order_user} = req.query
+    const {events_orders, total_price, order_quantity, order_users, eventName, eventPrice} = req.query
     // console.log(events_orders)
     // console.log(total_price)
     // console.log(order_quantity)
-    // console.log(order_user)
+    // console.log(order_users)
 
     const PaypalClient = client()
 
@@ -43,15 +44,11 @@ export default async function handler(req, res) {
                         }
                     }
                 },
-                // items: {
-                //     name: eventName,
-                //     unit_amount: {
-                //         currency_code: "USD",
-                //         value: eventPrice
-                //     },
-                //     quantity: order_quantity
-                //
-                // }
+                items: [{
+                    name: eventName,
+                    unit_amount: {value: eventPrice, currency_code: "USD" },
+                    quantity: order_quantity
+                },]
             },
         ],
     })
@@ -65,7 +62,7 @@ export default async function handler(req, res) {
         events_orders: events_orders,
         total_price: total_price,
         order_quantity: order_quantity,
-        order_user: order_user,
+        order_users: order_users,
         status: 'PENDING'
     })
     // console.log({order_uid: response.result.id})

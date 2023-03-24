@@ -33,9 +33,9 @@
     "order_uid": {
       "type": "uid"
     },
-    "order_user": {
+    "order_users": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "users_order"
     },

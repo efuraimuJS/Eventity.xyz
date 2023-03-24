@@ -41,7 +41,7 @@ export default NextAuth({
 
             return Promise.resolve(session)
         },
-        jwt: async ({token, user}) => {
+        jwt: async ({token, user, account, profile, isNewUser}) => {
             const isSignIn = !!user
             if (isSignIn){
                 token.id = user.id

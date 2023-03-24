@@ -77,9 +77,9 @@
     },
     "users_order": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::order.order",
-      "mappedBy": "order_user"
+      "mappedBy": "order_users"
     }
   }
 }
