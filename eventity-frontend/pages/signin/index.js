@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Image from "next/image";
 import {AiFillGoogleCircle} from "react-icons/ai";
 
-import {signIn, useSession} from 'next-auth/react';
+import {getSession, signIn, useSession} from 'next-auth/react';
 import {useRouter} from 'next/router'
 import {AlertContext} from "../../context/AlertContext";
 
@@ -15,7 +15,7 @@ import AlertFlash from '../../components/global/AlertFlash'
 
 export default function SignIn() {
     const {data: session} = useSession();
-    const { addAlert, alerts } = useContext(AlertContext);
+    const {addAlert, alerts} = useContext(AlertContext);
 
     console.log(alerts)
 
@@ -34,25 +34,43 @@ export default function SignIn() {
             console.log(result)
 
             if (result.ok) {
-                await router.replace('/')
-                return;
-            }else{
-                addAlert('Hello world!', 'success');
+
+                await router.replace('/').then(() => {
+                    addAlert('Success! You have been authenticated and logged in.', 'success ',
+                        'Hey, Welcome back to Eventity');
+                })
+
+            } else {
+                addAlert('Authentication failed. Please check your username and password.'
+                    , 'danger ',
+                    'Oh snap! You got an error!');
             }
-        }catch (e) {
+
+        } catch (e) {
 
         }
         // alert('Credential is not valid');
     }
 
     // Check if a user is signed in? Else Rerender the SignIn page
-    if (session) {
-        router.replace('/')
-        return;
-    }
+
+    (async () => {
+        if (session) {
+
+            // await router.replace('/').then(() => {
+            //     addAlert(' You are already authenticated and logged in.', 'info ',
+            //         'FYI! Just so you know!');
+            // })
+
+        } else {
+            // await addAlert(' Please enter your valid login credentials to access your account!', 'info ',
+            //     'FYI! Just so you know!');
+
+        }
+    })()
 
     return (<>
-            <div  className={`${styles.masterContainer} d-flex`}>
+            <div className={`${styles.masterContainer} d-flex`}>
                 <div className={`${styles.signinContainer} position-absolute`}>
                     <Row style={{width: "inherit"}} className={styles.signinContainer}>
                         <Col className={styles.signinContainer} sm={`12`} md="5">
@@ -60,9 +78,9 @@ export default function SignIn() {
                                 <Link href={`/`}>
                                     <Image
                                         src="/logo-no-background_web.svg"
-                                           alt="Eventity.xyz"
-                                           width={150}
-                                           height={37}
+                                        alt="Eventity.xyz"
+                                        width={150}
+                                        height={37}
                                     />
                                 </Link>
                             </div>
@@ -129,4 +147,24 @@ export default function SignIn() {
         </>
 
     )
+}
+
+export async function getServerSideProps({req, query: {slug}}) {
+
+    const session = await getSession({req})
+
+    if (session) {
+
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
+    }
+
+
+    return {
+        props: {},
+    };
 }

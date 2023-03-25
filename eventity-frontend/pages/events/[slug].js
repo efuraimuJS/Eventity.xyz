@@ -279,6 +279,7 @@ export async function getServerSideProps({req, query: {slug}}) {
     console.log(session)
 
     if (!session) {
+
         return {
             redirect: {
                 destination: '/signin',

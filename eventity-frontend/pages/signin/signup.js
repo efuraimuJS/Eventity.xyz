@@ -8,25 +8,22 @@ import Alert from 'react-bootstrap/Alert';
 
 import {useSession} from 'next-auth/react';
 import {useRouter} from 'next/router'
-import {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import * as Yup from 'yup';
 import axios from "axios";
 import {ErrorMessage, Field, Form, Formik} from 'formik';
+import AlertFlash from "../../components/global/AlertFlash";
+import {AlertContext} from "../../context/AlertContext";
 
 
 export default function SignUp() {
-    const [show, setShow] = useState(false);
     const [email, setEmail] = useState('');
-    const [alert, setAlert] = useState([])
-
     const {data: session} = useSession()
-    const router = useRouter()
+    const {alerts, addAlert} = useContext(AlertContext);
 
-    // Add this useEffect block
-    useEffect(() => {
-        console.dir(alert);
-    }, [alert]);
+    const router = useRouter()
+    console.log(alerts)
 
     const initialValues = {
         username: '',
@@ -42,61 +39,53 @@ export default function SignUp() {
         passwordConfirm: Yup.string().oneOf([Yup.ref('password'), null, "Passwords must match"]).required('Required')
     })
 
-    const onSubmit = (values, {setSubmitting, resetForm}) => {
-        // setAlert()
-        // setEmail()
+    const onSubmit = async (values, {setSubmitting, resetForm}) => {
 
-        // console.log(e.target.username.value, e.target.password.value, e.target.passwordConfirm.value, e.target.email.value)
-        // console.log(values)
-        axios
+        await axios
             .post('http://localhost:1337/api/auth/local/register', values, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 }
             )
-            .then(response => {
+            .then(async response => {
                 // Handle success.
                 const message = `Please check your email (${values.email}) to confirm your account.`;
-
-                setAlert(['success', message])
                 setEmail(values.email)
 
                 resetForm();
+                await router.replace('/signin').then(()=> {
+                    addAlert(message, 'success ',
+                        'Congratulations! You have successfully registered for an Eventity Account');
+                })
+
 
             })
             .catch(error => {
                 // Handle error.
                 console.log(error)
                 // console.log(error.response.data.error.message)
-                if (!error.response.data.error.message) {
-                    setAlert(['error', 'Something went wrong'])
-                    setShow(true)
+                if (!error.response?.data.error.message) {
+                    addAlert('Authentication failed. Please check your username and password.'
+                        , 'danger ',
+                        'Oh snap! You got an error!');
                 } else {
-                    const messages = []
-                    messages.push(error.response.data.error.message)
-
-                    // console.log(messages)
-                    // console.log(messages[0])
-
-                    const errorSet = new Set();
-                    messages.map((message, i) => {
-                        let msgToPush = `<li>&#8226; ${message}</li>`.trim()
-                        errorSet.add(msgToPush)
-
-                    });
-                    setAlert(['alert', errorSet]);
-                    setShow(true)
+                    const message = error.response?.data.error.message
+                    addAlert(message,
+                        'danger ',
+                        'Oh snap! You got an error!');
                 }
                 // console.log('An error occurred:', error.response);
             }).finally(() => {
-            setSubmitting(false)
-        });
+                setSubmitting(false)
+            });
     }
 
     // Check if a user is signed in? Else Rerender the SignIn page
     if (session) {
         router.replace('/')
+            addAlert(' You already have an Eventity Account.', 'info ',
+                'FYI! Just so you know!');
         return;
     }
 
@@ -114,19 +103,7 @@ export default function SignUp() {
                                 </Link>
                             </div>
                             <div id={styles.formBoxContainer} className={`mx-3 pt-3`}>
-                                {
-                                    ((alert && show) && (
-                                        <>
-                                            <Alert className={styles.authAlerts} variant="danger"
-                                                  onClose={() => setShow(false)} dismissible>
-                                            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                                            <ul>
-                                                <div dangerouslySetInnerHTML={{ __html: alert[1][Symbol.iterator]().next().value }} />
-                                            </ul>
-                                        </Alert>
-                                        </>
-                                    ))
-                                }
+                                <AlertFlash/>
                                 <h1>Create your <br/> account</h1>
                                 <Formik initialValues={initialValues}
                                         validateSchema={validateSchema}

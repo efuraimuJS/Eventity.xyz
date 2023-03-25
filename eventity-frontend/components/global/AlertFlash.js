@@ -13,7 +13,7 @@ const AlertFlash = () => {
                 alerts?.map((alert, index) => (
                     <Alert className={styles.authAlerts} variant={`${alert.type}`}
                            onClose={() => removeAlert(index)} dismissible>
-                        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                        <Alert.Heading>{`${alert.header}`}</Alert.Heading>
                         <ul>
                             <div dangerouslySetInnerHTML={{__html: `<li>&#8226; ${alert.message}</li>`}}/>
                         </ul>

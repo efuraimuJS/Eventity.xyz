@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Tab, Tabs} from "react-bootstrap";
 import Layout from "../../components/global/layout";
 import {ImCalendar, ImClock, ImLocation2, ImPriceTags, ImTicket,} from "react-icons/im";
@@ -8,8 +8,10 @@ import Pagination from "../../components/pagination";
 import InnerPageLayout from "../../components/inner-page-layout";
 import {useSession} from "next-auth/react";
 import {useRouter} from 'next/router'
+import {AlertContext} from "../../context/AlertContext";
 
 const EventPage = ({events}) => {
+    const {addAlert, alerts} = useContext(AlertContext);
 
 
     const [key, setKey] = useState("AllEvents");
@@ -41,8 +43,11 @@ const EventPage = ({events}) => {
 
     // Check if a user is signed in? Else Rerender the SignIn page
     if (!session) {
-        router.replace('/')
-
+        useEffect(()=>{
+            router?.replace('/signin')
+            addAlert(' Please enter your valid login credentials to access your account!', 'info ',
+                'FYI! Just so you know!');
+        },[])
 
         return;
     }

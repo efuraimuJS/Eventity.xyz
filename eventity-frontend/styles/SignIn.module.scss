@@ -38,6 +38,14 @@
   }
 }
 
+.globalAuthAlerts{
+  z-index: 9999 !important;
+  position: absolute;
+  min-width: 100%;
+  top: 0;
+  opacity: 0.9;
+}
+
 @media (max-width: 767.98px) {
   #formBoxContainer {
     width: 511.333333333px;
@@ -58,4 +66,5 @@
     width: 213.333333333px;
   }
 }
+
 

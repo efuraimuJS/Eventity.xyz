@@ -6,9 +6,9 @@ const AlertContextProvider = ({ children }) => {
     const [alerts, setAlerts] = useState([]);
     const [show, setShow] = useState(false);
 
-    const addAlert = (message, type = 'success') => {
+    const addAlert = (message, type = 'success',header) => {
         let valueSets = new Set()
-        valueSets.add({ message, type })
+        valueSets.add({ message, type, header })
         setAlerts([...valueSets]);
         setShow(true)
     };

@@ -4,6 +4,9 @@ import Layout from "../components/global/layout";
 import UpcomingEvents from "../components/upcoming-events";
 import FeaturedEvents from "../components/featured-events";
 import {API_URL} from "../config";
+import AlertFlash from "../components/global/AlertFlash";
+import React from "react";
+import styles from "../styles/SignIn.module.scss";
 
 const inter = Inter({subsets: ["latin"]});
 
@@ -13,6 +16,10 @@ export default function Home({events, blogs}) {
     return (
 
             <Layout title="Eventity.xyz | HomePage">
+                <div className={styles.globalAuthAlerts}>
+                    <AlertFlash/>
+                </div>
+
                 <Hero/>
                 <FeaturedEvents events={eventsData}/>
                 <UpcomingEvents events={eventsData}/>
