@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {Navbar, NavDropdown} from "react-bootstrap";
 import {AiOutlineLogin, AiOutlineUserAdd, AiOutlineUserDelete, AiTwotoneNotification} from "react-icons/ai";
+import { BsPaypal } from "react-icons/bs";
 
 import Image from 'next/image'
 import {signOut, useSession} from 'next-auth/react';
@@ -96,7 +97,7 @@ const Header = () => {
                                                 </li>
                                                 <li className="nav-item">
                                                     <Link className="nav-link" href="/pricing">
-                                                        Payments
+                                                        <BsPaypal/> Payments
                                                     </Link>
                                                 </li>
                                             </div>

@@ -61,9 +61,7 @@ export default function SignUp() {
 
                 setAlert(['success', message])
                 setEmail(values.email)
-                // console.log('Well done!');
-                // console.log('User profile', response.data.user);
-                // console.log('User token', response.data.jwt);
+
                 resetForm();
 
             })

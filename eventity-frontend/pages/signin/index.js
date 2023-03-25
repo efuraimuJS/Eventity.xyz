@@ -1,3 +1,5 @@
+import React, { useContext } from 'react';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from '../../styles/SignIn.module.scss'
@@ -7,27 +9,40 @@ import {AiFillGoogleCircle} from "react-icons/ai";
 
 import {signIn, useSession} from 'next-auth/react';
 import {useRouter} from 'next/router'
+import {AlertContext} from "../../context/AlertContext";
 
+import AlertFlash from '../../components/global/AlertFlash'
 
 export default function SignIn() {
     const {data: session} = useSession();
+    const { addAlert, alerts } = useContext(AlertContext);
+
+    console.log(alerts)
+
     // console.log(session)
     const router = useRouter()
 
     const onSubmit = async (e) => {
         e.preventDefault()
         // console.log(e.target.password.value, e.target.email.value)
-        const result = await signIn('credentials', {
-            redirect: false,
-            email: e.target.email.value,
-            password: e.target.password.value,
-        })
+        try {
+            const result = await signIn('credentials', {
+                redirect: false,
+                email: e.target.email.value,
+                password: e.target.password.value,
+            })
+            console.log(result)
 
-        if (result.ok) {
-            await router.replace('/')
-            return;
+            if (result.ok) {
+                await router.replace('/')
+                return;
+            }else{
+                addAlert('Hello world!', 'success');
+            }
+        }catch (e) {
+
         }
-        alert('Credential is not valid');
+        // alert('Credential is not valid');
     }
 
     // Check if a user is signed in? Else Rerender the SignIn page
@@ -52,6 +67,8 @@ export default function SignIn() {
                                 </Link>
                             </div>
                             <div id={styles.formBoxContainer} className={`mx-3 pt-3`}>
+
+                                <AlertFlash/>
                                 <h1>Sign into your <br/> account</h1>
 
                                 <form onSubmit={onSubmit}>

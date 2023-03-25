@@ -1,6 +1,8 @@
 import Head from "next/head";
 import Footer from "./Footer";
 import Header from "./Header";
+import Alert from "react-bootstrap/Alert";
+import styles from "../../styles/SignIn.module.scss";
 
 export default function Layout({ title, keywords, description, children }) {
   return (
@@ -11,7 +13,10 @@ export default function Layout({ title, keywords, description, children }) {
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
-      <div>{children}</div>
+
+      <div>
+          {children}
+      </div>
       <Footer />
     </div>
   );
