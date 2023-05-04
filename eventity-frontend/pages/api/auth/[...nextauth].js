@@ -1,5 +1,7 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from "next-auth/providers/google";
+
 import {signIn} from '../../../services/auth'
 
 export default NextAuth({
@@ -32,8 +34,17 @@ export default NextAuth({
                     return null;
                 }
             }
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET
         })
+
     ],
+    session: {
+        jwt: true,
+    },
+
     callbacks: {
         session: async ({session, token}) => {
             session.id = token.id
@@ -43,11 +54,28 @@ export default NextAuth({
         },
         jwt: async ({token, user, account, profile, isNewUser}) => {
             const isSignIn = !!user
-            if (isSignIn){
+            if (isSignIn) {
                 token.id = user.id
                 token.jwt = user.jwt
+            } else if(isSignIn && account.provider === 'google') {
+                const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/auth/${account.provider}/callback?access_token=${account?.accessToken}`
+                );
+                const data = await response.json();
+                console.log(data)
+                token.jwt = data.jwt;
+                token.id = data.user.id;
+
             }
             return Promise.resolve(token)
         }
     }
 })
+
+/*`const response = await fetch(
+                    `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.accessToken}`
+                );
+                const data = await response.json();
+                token.jwt = data.jwt;
+                token.id = data.user.id;
+*/

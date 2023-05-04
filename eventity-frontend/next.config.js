@@ -15,6 +15,13 @@ module.exports = {
   },
 }
 
+module.exports = {
+  images: {
+    formats: ['image/avif', 'image/webp']
+  }
+}
+
+
 module.exports = withImages();
 module.exports = nextConfig
 

@@ -9,3 +9,5 @@ module.exports = ({ env }) => ({
     useNullAsDefault: true,
   },
 });
+
+// \\wsl$\Ubuntu-22.04\home\efuraimujs\project22\Eventity.xyz\eventity-backend\.tmp\data.db

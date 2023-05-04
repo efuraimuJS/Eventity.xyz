@@ -16,14 +16,12 @@ const strapi = new Strapi({
 
 
 export default async function handler(req, res) {
-    console.log(req.query)
-    // console.log(req.body)
 
-    const {events_orders, total_price, order_quantity, order_users, eventName, eventPrice} = req.query
-    // console.log(events_orders)
-    // console.log(total_price)
-    // console.log(order_quantity)
-    // console.log(order_users)
+    console.log(req.body)
+
+    // const {events_orders, total_price, order_quantity, order_users, eventName, eventPrice} = req.query
+    const {events_orders, total_price, order_quantity, order_users, eventName, eventPrice} = req.body
+
 
     const PaypalClient = client()
 

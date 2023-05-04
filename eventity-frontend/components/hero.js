@@ -15,18 +15,18 @@ const Hero = () => {
                     <div className="row justify-content-center">
                         <div className="col-xxl-6 col-xl-7 col-lg-8 col-md-10 text-center">
                             <h2 className="hero__title">
-                                Discover Events & workshops Around You
+                                Looking for a hassle-free way to attend exciting events
                             </h2>
                             <p className="hero__description mt-4">
-                                Don't miss out on the experience of a lifetime - secure your
-                                spot at your preferable events with our easy online ticket
-                                purchasing system and join it for building a good community.
+                                So why wait? Join the thriving Eventity community today and
+                                start experiencing the events and workshops that you won't
+                                want to miss.
                             </p>
-                            {
-                                (
-                                    !session ? <SearchBar stylesValue={`mt-5`}/> : null
-                                )
-                            }
+                            {/*{*/}
+                            {/*    (*/}
+                            {/*        // !session ? <SearchBar stylesValue={`mt-5`}/> : null*/}
+                            {/*    )*/}
+                            {/*}*/}
 
                         </div>
                     </div>

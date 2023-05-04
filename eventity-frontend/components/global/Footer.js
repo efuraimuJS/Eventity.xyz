@@ -22,7 +22,7 @@ const Footer = () => {
                 {/*  <Link href="tel:610383766284">+0123456789</Link>*/}
                 {/*</h2>*/}
                 <Link href="/contact" className="smooth button button__primary">
-                  <span>Send me a message</span>
+                  <span>Send us a message</span>
                 </Link>
               </div>
             </div>
